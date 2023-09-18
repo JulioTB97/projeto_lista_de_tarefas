@@ -1,0 +1,7 @@
+<h3>Criar Tarefa</h3>
+<a href="{% url 'tasks' %}">Voltar</a>
+<form method="Post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value ="Criar">    
+</form>
