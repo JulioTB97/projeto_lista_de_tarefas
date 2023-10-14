@@ -1,11 +1,17 @@
 {% extends 'lista_tarefas_app/main.html' %}
 {% block content %}
 
-<a href="{% url 'tasks' %}"> Cancel</a>
-<form method="POST">
-    {% csrf_token %}
-    <p>Você tem certeza que deseja deletar essa tarefa? "{{task}}"</p>
-    <input type= "submit" value="Deletar"/>
-</form>
+<div class="header-bar">
+    <a href="{% url 'tasks' %}"> &#8592;Voltar</a>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Você tem certeza que deseja deletar essa tarefa? "{{task}}"</p>
+        <input class="button" type= "submit" value="Deletar"/>
+    </form>
+</div>
+
 
 {% endblock content %}
