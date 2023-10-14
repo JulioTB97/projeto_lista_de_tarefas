@@ -1,3 +1,6 @@
+{% extends 'lista_tarefas_app/main.html' %}
+{% block content %}
+
 <h3>Criar Tarefa</h3>
 <a href="{% url 'tasks' %}">Voltar</a>
 <form method="Post" action="">
@@ -5,3 +8,5 @@
     {{form.as_p}}
     <input type="submit" value ="Criar">    
 </form>
+
+{% endblock content %}

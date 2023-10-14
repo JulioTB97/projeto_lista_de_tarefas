@@ -1,3 +1,6 @@
+{% extends 'lista_tarefas_app/main.html' %}
+{% block content %}
+
 <h1>Login</h1>
 
 <form method="POST">
@@ -7,3 +10,6 @@
 </form>
 
 <p>Ainda não possui uma conta? <a href="{% url 'register' %}">Registrar</a></p>
+
+
+{% endblock content %}
