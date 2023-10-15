@@ -5,48 +5,49 @@
 <div class="header-bar">
     <div>
         <h1>Olá {{request.user|title}}</h1>
-        <h3 style="margin:0">Você possui <i>{{count}}</i> tarefa incompleta{{ count|pluralize:"s" }}</h3>
+        <h3 style="margin:0">Você possui <i>{{count}}</i> tarefa{{ count|pluralize:"s" }} incompleta{{ count|pluralize:"s" }}</h3>
     </div>
 
     {% if request.user.is_authenticated %}
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a> {% else %}
+    <a href="{% url 'login' %}">Login</a> {% endif %}
 </div>
 
 
 <div id="search-add-wrapper">
-    <form method="GET" style="margin-top: 20px; display: flex;">
-        <input type='text' name='search-area' value="{{search_input}}" >
-        <input class="button" type="submit" value='Buscar'>
-    </form>
+    <form method="GET" style="display: flex;">
+        <input type='text' name='search-area' placeholder="Busque sua tarefa" value="{{search_input}}">                  
+    </form>   
+    {% if tasks|length > 0 %}
     <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
+    {% endif %}
 </div>
 
+<div style="display: flex; justify-content: center; align-items: center; margin-top: -57px; margin-left: -60px;">
+    <input class="button" type="submit" value='Buscar'>
+</div>
 
-
-
-<div class="task-items-wrapper">
+<div id="tasklist" class="task-items-wrapper">
     {% for task in tasks %}
-    <div class="task-wrapper">
-        {% if task.complete %}
+    <div class="task-wrapper" data-position="{{task.pk}}">
         <div class="task-title">
+            {% if task.status %}
             <div class="task-complete-icon"></div>
-            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
-        </div>
-        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
-        {% else %}
-        <div class="task-title">
+            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i> {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'task-update' task.id %}">{{task}}</a>
+            <a href="{% url 'task-update' task.id %}">{{task}}</a> {% endif %}
         </div>
-        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
-        {% endif %}
+        <div class="task-controls">
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            <span class="handle">&nbsp;&#10247;</span>
+        </div>
     </div>
 
     {% empty %}
-    <h3>Nenhuma tarefa encontrada.</h3>
+    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+        <h4>Nenhuma tarefa criada.</h4>
+        <h3><a class="button" href="{% url 'task-create' %}"> Criar nova tarefa</a></h3>
+    </div>
     {% endfor %}
 </div>
 

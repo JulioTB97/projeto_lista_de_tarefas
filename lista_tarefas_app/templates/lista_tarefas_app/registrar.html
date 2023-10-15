@@ -8,13 +8,13 @@
 <div class="card-body">
     <form method="POST">
         {% csrf_token %}
-        <label>{{form.username.label}}</label>
+        <label>Usuário</label>
         {{form.username}}
 
-        <label>{{form.password1.label}}</label>
+        <label>Senha</label>
         {{form.password1}}
 
-        <label>{{form.password2.label}}</label>
+        <label>Confirme a senha</label>
         {{form.password2}}
         <input style="margin-top:10px ;" class="button" type="submit" value="Registrar">
     </form>
