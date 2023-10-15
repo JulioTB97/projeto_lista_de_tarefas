@@ -18,16 +18,14 @@
     <form method="GET" style="display: flex;">
         <input type='text' name='search-area' placeholder="Busque sua tarefa" value="{{search_input}}">                  
     </form>   
-    {% if tasks|length > 0 %}
     <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
-    {% endif %}
 </div>
 
-<div style="display: flex; justify-content: center; align-items: center; margin-top: -57px; margin-left: -60px;">
+<div style="display: flex; justify-content: center; align-items: center; margin-top: -66px; margin-left: -60px; margin-bottom: 60px; ">
     <input class="button" type="submit" value='Buscar'>
 </div>
 
-<div id="tasklist" class="task-items-wrapper">
+<div id="tasklist" class="task-items-wrapper" style="margin-top: 20px;">
     {% for task in tasks %}
     <div class="task-wrapper" data-position="{{task.pk}}">
         <div class="task-title">
@@ -43,12 +41,11 @@
         </div>
     </div>
 
-    {% empty %}
-    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
-        <h4>Nenhuma tarefa criada.</h4>
-        <h3><a class="button" href="{% url 'task-create' %}"> Criar nova tarefa</a></h3>
-    </div>
-    {% endfor %}
+{% empty %}
+<div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+    <h4>Nenhuma tarefa criada.</h4>
+</div>
+{% endfor %}
 </div>
 
 {% endblock content %}
